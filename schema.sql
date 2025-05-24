@@ -1,8 +1,7 @@
--- Criação do banco de dados
+
 CREATE DATABASE IF NOT EXISTS streaming_db;
 USE streaming_db;
 
--- Tabela de Planos de Assinatura
 CREATE TABLE IF NOT EXISTS planos (
     id_plano INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
@@ -10,7 +9,7 @@ CREATE TABLE IF NOT EXISTS planos (
     duracao_dias INT NOT NULL
 );
 
--- Tabela de Usuários
+
 CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -19,7 +18,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     data_cadastro DATE NOT NULL
 );
 
--- Tabela de Assinaturas
+
 CREATE TABLE IF NOT EXISTS assinaturas (
     id_assinatura INT PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT NOT NULL,
@@ -31,7 +30,7 @@ CREATE TABLE IF NOT EXISTS assinaturas (
     FOREIGN KEY (id_plano) REFERENCES planos(id_plano)
 );
 
--- Inserção de dados de exemplo
+
 INSERT INTO planos (nome, preco, duracao_dias) VALUES
     ('Básico', 19.90, 30),
     ('Premium', 29.90, 30),
@@ -44,3 +43,10 @@ BEGIN
     WHERE id_assinatura = assinatura_id;
 END //
 DELIMITER ;
+
+SELECT u.nome, u.email, p.nome AS plano, a.data_fim
+FROM usuarios u
+JOIN assinaturas a ON u.id_usuario = a.id_usuario
+JOIN planos p ON a.id_plano = p.id_plano
+WHERE a.data_fim BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)
+AND a.status = 'ativo';
