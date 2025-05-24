@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS planos (
     duracao_dias INT NOT NULL
 );
 
-
 CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -17,7 +16,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
     senha VARCHAR(255) NOT NULL,
     data_cadastro DATE NOT NULL
 );
-
 
 CREATE TABLE IF NOT EXISTS assinaturas (
     id_assinatura INT PRIMARY KEY AUTO_INCREMENT,
@@ -30,12 +28,12 @@ CREATE TABLE IF NOT EXISTS assinaturas (
     FOREIGN KEY (id_plano) REFERENCES planos(id_plano)
 );
 
-
 INSERT INTO planos (nome, preco, duracao_dias) VALUES
     ('Básico', 19.90, 30),
     ('Premium', 29.90, 30),
     ('Família', 39.90, 30);
 DELIMITER //
+    
 CREATE PROCEDURE renovar_assinatura(IN assinatura_id INT)
 BEGIN
     UPDATE assinaturas 
