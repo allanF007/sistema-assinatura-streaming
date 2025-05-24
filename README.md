@@ -16,4 +16,4 @@ Este projeto é um sistema de gerenciamento de assinaturas para uma plataforma d
 Consulte o arquivo [schema.sql](schema.sql) para o script completo.
 
 ## 🎥 Vídeo Explicativo
-Assista ao vídeo de apresentação: [Link do YouTube](#) *(adicione depois)*
+Assista ao vídeo de apresentação: [Link do YouTube](#) 
