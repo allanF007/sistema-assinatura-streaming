@@ -36,3 +36,11 @@ INSERT INTO planos (nome, preco, duracao_dias) VALUES
     ('Básico', 19.90, 30),
     ('Premium', 29.90, 30),
     ('Família', 39.90, 30);
+DELIMITER //
+CREATE PROCEDURE renovar_assinatura(IN assinatura_id INT)
+BEGIN
+    UPDATE assinaturas 
+    SET data_fim = DATE_ADD(data_fim, INTERVAL 30 DAY)
+    WHERE id_assinatura = assinatura_id;
+END //
+DELIMITER ;
